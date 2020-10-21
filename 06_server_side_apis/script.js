@@ -1,13 +1,10 @@
 
 
-
-
 $(".weatherBtn").on("click", function(event){
     event.preventDefault();
 
     var city = $(".weatherSearch").val();
     var queryURL = "https://api.openweathermap.org/data/2.5//weather?q=" + city + "&units=imperial/uvi?lat={lat}&lon={lon}&appid=64dc0b69587cedd5ecde3512a843d7c5";
-
 
 
     // Ajax call
@@ -30,7 +27,13 @@ $(".weatherBtn").on("click", function(event){
         
         localStorage.setItem("city", JSON.stringify(response));
 
+        // Creates button list on left side page.
+        var cityBtn = $("<li>").html(response.name);
+
+        cityBtn.addClass("btn btn-outline-secondary");
+        $(".btnList").append(cityBtn);
+        localStorage.setItem("list", JSON.stringify(response));
     })
     
-    var cityBtn = $("<button>").html()
 })
+
