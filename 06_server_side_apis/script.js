@@ -14,6 +14,8 @@ $(".weatherBtn").on("click", function(event){
 
     }).then(function(response) {
 
+        $(".weatherCity").empty();
+
         var cityName = $("<h1>").html(response.name);
         var temp = $("<p>").html("Temperature: " + response.main.temp);
         var humid = $("<p>").html("Humidity: " + response.main.humidity);
@@ -25,14 +27,22 @@ $(".weatherBtn").on("click", function(event){
 
         $(".weatherCity").append(cityName, temp, humid, windSpeed, uvIndex1, uvIndex2);
         
-        localStorage.setItem("city", JSON.stringify(response));
 
         // Creates button list on left side page.
         var cityBtn = $("<li>").html(response.name);
 
-        cityBtn.addClass("btn btn-outline-secondary");
+        cityBtn.addClass("btn btn-outline-secondary mt-2");
         $(".btnList").append(cityBtn);
-        localStorage.setItem("list", JSON.stringify(response));
+        localStorage.setItem(city, JSON.stringify(response));
+
+        $(".btnList").on("click", function(){
+
+            var get = localStorage.getItem(city);
+
+            document.getElementById("weatherUpdate").innerHTML = get;
+
+        })
+
     })
     
 })
