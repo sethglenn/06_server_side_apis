@@ -31,7 +31,7 @@ $(".weatherBtn").on("click", function(event){
 
         $(".btnList").on("click", function(){
 
-            var get = localStorage.getItem(cities);
+            var get = localStorage.getItem(city);
 
             document.getElementById("weatherUpdate").innerHTML = get;
 
@@ -69,7 +69,7 @@ function weatherCard(response){
 
         $(".weatherCity").append(cityName, date, temp, humid, windSpeed, uvIndex1, uvIndex2);
 
-        localStorage.setItem(city, JSON.stringify(response));
+        localStorage.setItem("city", JSON.stringify(response));
 
         // Creates button list on left side page and store to local storage.
         var cityBtn = $("<li>").html(response.city.name);
