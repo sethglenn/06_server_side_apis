@@ -12,12 +12,6 @@ function getWeather(city){
 }
 var cities = [];
 
-cities.push(city);
-
-for (var i = 0; i< cities.length; i++){
-    var city = cities[i];
-}
-
 $(".weatherBtn").on("click", function(event){
     event.preventDefault();
 
@@ -28,12 +22,8 @@ $(".weatherBtn").on("click", function(event){
         console.log(response);
 
         weatherCard(response);
-
+        // Response when city button is clicked.
         $(".btnList").on("click", function(){
-
-            var get = localStorage.getItem(city);
-
-            document.getElementById("weatherUpdate").innerHTML = get;
 
             $(".weatherCity").empty();
 
@@ -69,16 +59,25 @@ function weatherCard(response){
 
         $(".weatherCity").append(cityName, date, temp, humid, windSpeed, uvIndex1, uvIndex2);
 
-        localStorage.setItem("city", JSON.stringify(response));
+        // localStorage.setItem("city", JSON.stringify(response));
 
         // Creates button list on left side page and store to local storage.
-        var cityBtn = $("<li>").html(response.city.name);
+        cities.push(city);
 
-        var city = cityName;
+        for (var i = 0; i< cities.length; i++){
+            var cityBtn = $("<li>").html(response.city.name);
 
-        cityBtn.addClass("btn btn-outline-secondary mt-2");
+            // adding attribute
+            cityBtn.attr(city, cities[i]);
 
-        $(".btnList").append(cityBtn);
+            var city = cityName;
+
+            cityBtn.addClass("btn btn-outline-secondary btn-list mt-2");
+
+            $(".btnList").append(cityBtn);
+
+        }
+
         // empty commands to refresh page
         $(".fiveDay").empty();
         $(".sixDay").empty();
